@@ -16,9 +16,9 @@ st.set_option('deprecation.showfileUploaderEncoding', False)
 
 @st.experimental_singleton
 def load_model():
-    if not os.path.isfile('animal_model_trained.hdf5'):
-        urllib.request.urlretrieve('https://github.com/Prashant2091/Animal_Classification_System/blob/main/animal_model.hdf5', 'animal_model_trained.hdf5')
-    return tf.keras.models.load_model('animal_model_trained.hdf5')
+    if not os.path.isfile('model.hdf5'):
+        urllib.request.urlretrieve('https://github.com/Prashant2091/Animal_Classification_System/blob/main/animal_model_trained.hdf5', 'model.hdf5')
+    return tf.keras.models.load_model('model.hdf5')
 
 def predict_class(image, model):
 
