@@ -10,16 +10,17 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import urllib.request
+import subprocess
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 @st.cache(allow_output_mutation=True)
 
 @st.experimental_singleton
 def load_model():
-    if not os.path.isfile('model.hdf5'):
-        urllib.request.urlretrieve('https://github.com/Prashant2091/Animal_Classification_System/blob/main/animal_model_trained.hdf5', 'model.hdf5')
-    return tf.keras.models.load_model('model.hdf5')
-
+    
+  if not os.path.isfile('model.hdf5'):
+    subprocess.run(['curl --output model.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/blob/main/animal_model_trained.hdf5"'], shell=True)
+    return tf.keras.models.load_model('model.hdf5', compile=False)
 def predict_class(image, model):
 
 	image = tf.cast(image, tf.float32)
