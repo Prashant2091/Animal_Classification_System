@@ -25,7 +25,7 @@ def load_model():
 def predict_class(image, model):
 
 	image = tf.cast(image, tf.float32)
-	image = tf.image.resize(image, [180, 180])
+	image = tf.image.resize(image, [188, 188])
 
 	image = np.expand_dims(image, axis = 0)
 
