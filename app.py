@@ -9,7 +9,9 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 from PIL import Image
-
+import subprocess
+if not os.path.isfile('animal_model_trained.hdf5'):
+    subprocess.run(['curl --output model.h5 "https://media.githubusercontent.com/media/ShyamaleeT/glaucocare/main/animal_model_trained.hdf5"'], shell=True)
 
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
