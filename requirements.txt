@@ -1,4 +1,4 @@
-﻿Flask==1.1.2
+
 numpy==1.20.3
 opencv-python-headless
 streamlit==1.13.0
