@@ -11,13 +11,13 @@ import numpy as np
 from PIL import Image
 import subprocess
 if not os.path.isfile('animal_model_trained.hdf5'):
-    subprocess.run(['curl --output model.h5 "https://media.githubusercontent.com/media/ShyamaleeT/glaucocare/main/animal_model_trained.hdf5"'], shell=True)
+    subprocess.run(['curl --output model.h5 "https://media.githubusercontent.com/media/ShyamaleeT/glaucocare/main/sep_5.hdf5"'], shell=True)
 
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 @st.cache(allow_output_mutation=True)
 def load_model():
-	model = tf.keras.models.load_model('animal_model_trained.hdf5', compile=False)
+	model = tf.keras.models.load_model('sep_5.hdf5', compile=False)
 	return model
 
 
