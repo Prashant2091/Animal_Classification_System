@@ -21,13 +21,16 @@ def load_model():
   if not os.path.isfile('model.hdf5'):
     subprocess.run(['curl --output model.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/blob/main/animal_model_trained.hdf5"'], shell=True)
     return tf.keras.models.load_model('model.hdf5', compile=False)
+
 def predict_class(image, model):
 
 	image = tf.cast(image, tf.float32)
-	image = tf.image.resize(image, [188, 188])
+	image = tf.image.resize(image, [180, 180])
 
 	image = np.expand_dims(image, axis = 0)
-        prediction = model.predict(image)
+
+	prediction = model.predict(image)
+
 	return prediction
 
 
