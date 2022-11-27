@@ -28,9 +28,8 @@ def predict_class(image, model):
 
 	image = np.expand_dims(image, axis = 0)
 
-	prediction = model.predict(image)
 
-	return prediction
+	return model.predict(image)
 
 
 model = load_model()
