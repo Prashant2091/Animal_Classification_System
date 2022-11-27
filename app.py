@@ -44,11 +44,11 @@ if file is None:
 else:
 	slot = st.empty()
 	slot.text('Running inference....')
-
+                                             
 	test_image = Image.open(file)
 
 	st.image(test_image, caption="Input Image", width = 400)
-	pred = predict_class(np.asarray(test_image), model)
+	pred = predict_class(np.asarray(model.predict(test_image), model))
 
 	class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
 
