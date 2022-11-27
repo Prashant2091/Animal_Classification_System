@@ -27,8 +27,7 @@ def predict_class(image, model):
 	image = tf.image.resize(image, [188, 188])
 
 	image = np.expand_dims(image, axis = 0)
-
-        prediction =  model.predict(image)
+        prediction = model.predict(image)
 	return prediction
 
 
