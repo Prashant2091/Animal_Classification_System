@@ -18,7 +18,7 @@ st.set_option('deprecation.showfileUploaderEncoding', False)
 def load_model():
     if not os.path.isfile('model.hdf5'):
         urllib.request.urlretrieve('https://github.com/Prashant2091/Animal_Classification_System/blob/main/animal_model_trained.hdf5', 'model.hdf5')
-    return tf.keras.models.load_model('model.h5')
+    return tf.keras.models.load_model('model.hdf5')
 
 def predict_class(image, model):
 
