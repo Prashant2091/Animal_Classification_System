@@ -9,13 +9,16 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 from PIL import Image
+import urllib.request
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 @st.cache(allow_output_mutation=True)
-def load_model():
-	model = tf.keras.models.load_model('animal_model_trained.hdf5', compile=False)
-	return model
 
+@st.experimental_singleton
+def load_model():
+    if not os.path.isfile('model.hdf5'):
+        urllib.request.urlretrieve('https://github.com/Prashant2091/Animal_Classification_System/blob/main/animal_model_trained.hdf5', 'model.hdf5')
+    return tensorflow.keras.models.load_model('model.h5')
 
 def predict_class(image, model):
 
