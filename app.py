@@ -28,8 +28,8 @@ def predict_class(image, model):
 
 	image = np.expand_dims(image, axis = 0)
 
-
-	return model.predict(image)
+        prediction =  model.predict(image)
+	return prediction
 
 
 model = load_model()
@@ -48,7 +48,7 @@ else:
 	test_image = Image.open(file)
 
 	st.image(test_image, caption="Input Image", width = 400)
-	pred = np.asarray(model.predict(test_image))
+	pred = np.asarray(predict_class(test_image), model)
 
 	class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
 
