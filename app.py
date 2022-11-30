@@ -51,8 +51,8 @@ else:
 	test_image = Image.open(file)
 
 	st.image(test_image, caption="Input Image", width = 400)
-	pred = predict_class(np.asarray(test_image), model)
-	#pred=model.predict(test_image).argmax()
+	#pred = predict_class(np.asarray(test_image), model)
+	pred=model.predict(test_image).argmax()
 	class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
 
 	result = class_names[np.argmax(pred)]
