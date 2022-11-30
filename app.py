@@ -141,7 +141,7 @@ from tensorflow.keras.applications.densenet import densenet169
 
 
 st.set_page_config(
-    page_title="ANimal Classification",
+    page_title="Animal Classification",
     page_icon="🏥",
 )
 
