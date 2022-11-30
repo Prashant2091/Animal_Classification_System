@@ -27,7 +27,8 @@ def predict_class(image, model):
 	image = tf.cast(image, tf.float32)
 	image = tf.image.resize(image, [188, 188])
 
-	image = np.expand_dims(image, axis = 0)
+	#image = np.expand_dims(image, axis = 0)
+	image = image[np.newaxis,...]
 
 	prediction = model.predict(image)
 
@@ -50,7 +51,8 @@ else:
 	test_image = Image.open(file)
 
 	st.image(test_image, caption="Input Image", width = 400)
-	pred = predict_class(np.asarray(test_image), model)
+	#pred = predict_class(np.asarray(test_image), model)
+	preds=model.predict(image).argmax()
 	class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
 
 	result = class_names[np.argmax(pred)]
