@@ -76,7 +76,7 @@ from tensorflow.keras import preprocessing
 import time
 fig = plt.figure()
 st.title('Animal Classifier amongst butterfly,cow,elephant,sheep,squirrel')
-st.markdown("Prediction :{butterfly,cow,elephant,sheep,squirrel)")
+st.markdown("Prediction :{butterfly,cow,elephant,sheep,squirrel}")
 #def main():
 #file_uploaded = st.file_uploader("Choose File", type=["png","jpg","jpeg"])
 image = st.file_uploader("Choose File", type=["png","jpg","jpeg"])
@@ -93,7 +93,7 @@ if class_btn:
             with st.spinner('Model working....'):
                  plt.imshow(image)
                  plt.axis("off")
-                 #predictions = predict(image)
+                 predictions = predict(image)
                  time.sleep(1)
                  st.success('Classified')
                  st.write(predictions)
@@ -118,7 +118,7 @@ def predict(image):
     predictions = model.predict(test_image)
     scores = tf.nn.softmax(predictions[0])
     scores = scores.numpy()
-    result = f"{class_names[np.argmax(scores)]} with a { (100 * np.max(scores)).round(2) } % confidence." 
+    image = f"{class_names[np.argmax(scores)]} with a { (100 * np.max(scores)).round(2) } % confidence." 
 
-    return result
-predict(image)
+    return image
+#predict(image)
