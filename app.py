@@ -95,6 +95,13 @@ if class_btn:
                  time.sleep(1)
                  st.success('Classified')
                  st.write(predictions)
+		
+def load_model():
+    
+  if not os.path.isfile('model.hdf5'):
+    subprocess.run(['curl --output model.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/blob/main/animal_model_trained.hdf5"'], shell=True)
+    return tf.keras.models.load_model('model.hdf5', compile=False)		
+model = load_model()		
 def predict(image):
     classifier_model = "animal_model_trained.hdf5"
       
@@ -111,3 +118,4 @@ def predict(image):
     result = f"{class_names[np.argmax(scores)]} with a { (100 * np.max(scores)).round(2) } % confidence." 
 
     return result
+predict()
