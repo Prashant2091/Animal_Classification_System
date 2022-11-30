@@ -75,7 +75,7 @@ from tensorflow.keras.models import *
 from tensorflow.keras import preprocessing
 import time
 fig = plt.figure()
-st.title('Green stem Classifier')
+st.title('Animal Classifier amongst butterfly,cow,elephant,sheep,squirrel')
 st.markdown("Prediction :{butterfly,cow,elephant,sheep,squirrel)")
 def main():
     file_uploaded = st.file_uploader("Choose File", type=["png","jpg","jpeg"])
