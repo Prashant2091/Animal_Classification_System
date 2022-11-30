@@ -96,12 +96,12 @@ if class_btn:
                  st.success('Classified')
                  st.write(predictions)
 		
-def load_model():
+'''def load_model():
     
   if not os.path.isfile('model.hdf5'):
     subprocess.run(['curl --output model.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/blob/main/animal_model_trained.hdf5"'], shell=True)
     return tf.keras.models.load_model('model.hdf5', compile=False)		
-model = load_model()		
+#model = load_model()	'''	
 def predict(image):
     classifier_model = "animal_model_trained.hdf5"
       
