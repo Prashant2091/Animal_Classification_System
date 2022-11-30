@@ -159,6 +159,7 @@ if uploaded_file is not None:
     Genrate_pred = st.button("Generate Prediction")    
     class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
     if Genrate_pred:
+     model.load_weights('animal_model_trained.hdf5')	
      preds = model.predict(img_reshape).argmax()
      preds=np.argmax(preds)
      scores = tf.nn.softmax(predictions[0])
