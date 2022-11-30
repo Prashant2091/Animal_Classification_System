@@ -95,10 +95,6 @@ def main():
                  time.sleep(1)
                  st.success('Classified')
                  st.write(predictions)
-		
-		
-		
-
 def predict(image):
     classifier_model = "animal_model_trained.hdf5"
       
@@ -112,6 +108,6 @@ def predict(image):
     predictions = model.predict(test_image)
     scores = tf.nn.softmax(predictions[0])
     scores = scores.numpy()
-    result = f"{class_names[np.argmax(scores)]} with a { (100 *       np.max(scores)).round(2) } % confidence." 
+    result = f"{class_names[np.argmax(scores)]} with a { (100 * np.max(scores)).round(2) } % confidence." 
 
     return result
