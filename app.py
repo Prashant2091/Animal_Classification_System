@@ -63,7 +63,7 @@ else:
 
 	st.success(output)'''
 
-import os
+'''import os
 import streamlit as st
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -121,4 +121,52 @@ def predict(image):
     image = f"{class_names[np.argmax(scores)]} with a { (100 * np.max(scores)).round(2) } % confidence." 
 
     return image
-#predict(image)
+#predict(image)'''
+
+
+
+
+
+
+import numpy as np
+import streamlit as st
+import tensorflow as tf
+import cv2
+from tensorflow.keras.preprocessing import image
+
+
+from tensorflow.keras.applications.densenet import densenet169
+
+
+
+
+st.set_page_config(
+    page_title="ANimal Classification",
+    page_icon="🏥",
+)
+
+#title
+st.title('Application of Deep Learning Models for Animal Classification')
+st.sidebar.success("Select a page above")
+model = tf.keras.models.load_model("animal_model_trained.hdf5")
+### load file
+uploaded_file = st.file_uploader("Choose an image file amongst {butterfly,cow,elephat,sheep,squirrel}", type=['jpg','png','jpeg'])
+if uploaded_file is not None:
+    # Convert the file to an opencv image.
+    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    opencv_image = cv2.imdecode(file_bytes, 1)
+    opencv_image = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB)
+    resized = cv2.resize(opencv_image,(188,188))
+    # Now do something with the image! For example, let's display it:
+    st.image(opencv_image, channels="RGB")
+    resized = tf.keras.applications.densenet.preprocess_input(resized)
+    img_reshape = resized[np.newaxis,...]
+    Genrate_pred = st.button("Generate Prediction")    
+    class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
+    if Genrate_pred:
+     preds = model.predict(img_reshape).argmax()
+     preds=np.argmax(preds)
+     scores = tf.nn.softmax(predictions[0])
+     scores = scores.numpy()
+     image = f"{class_names[np.argmax(scores)]} with a { (100 * np.max(scores)).round(2) } % confidence." 
+     st.write(image)
