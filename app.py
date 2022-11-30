@@ -136,8 +136,14 @@ from tensorflow.keras.preprocessing import image
 #from tensorflow.keras.applications.densenet import densenet169
 #title
 st.title('Application of Deep Learning Models for Animal Classification')
-st.sidebar.success("Select a page above")
-model = tf.keras.models.load_model("animal_model_trained.hdf5")
+st.sidebar.success("Select a page above")		
+def load_model():
+    
+  if not os.path.isfile('model.hdf5'):
+    subprocess.run(['curl --output model.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/blob/main/animal_model_trained.hdf5"'], shell=True)
+    return tf.keras.models.load_model('model.hdf5', compile=False)		
+model = load_model()
+#model = tf.keras.models.load_model("animal_model_trained.hdf5")
 ### load file
 uploaded_file = st.file_uploader("Choose an image file amongst {butterfly,cow,elephat,sheep,squirrel}", type=['jpg','png','jpeg'])
 if uploaded_file is not None:
