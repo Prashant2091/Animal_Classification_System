@@ -118,4 +118,4 @@ def predict(image):
     result = f"{class_names[np.argmax(scores)]} with a { (100 * np.max(scores)).round(2) } % confidence." 
 
     return result
-predict()
+predict(image)
