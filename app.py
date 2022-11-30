@@ -110,7 +110,7 @@ def predict(image):
     #model = load_model(classifier_model)
     model = load_model()  
     test_image = image.resize((188,188))
-    test_image = image[np.newaxis,...]
+    #test_image = image[np.newaxis,...]
     test_image = preprocessing.image.img_to_array(test_image)
     test_image = test_image / 255.0
     test_image = np.expand_dims(test_image, axis=0)
