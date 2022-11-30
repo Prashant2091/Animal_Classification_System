@@ -145,7 +145,7 @@ def load_model():
 model = load_model()
 #model = tf.keras.models.load_model("animal_model_trained.hdf5")
 ### load file
-uploaded_file = st.file_uploader("Choose an image file amongst {butterfly,cow,elephat,sheep,squirrel}", type=['jpg','png','jpeg'])
+uploaded_file = st.file_uploader("Choose an image file amongst {butterfly,cow,elephant,sheep,squirrel}", type=['jpg','png','jpeg'])
 if uploaded_file is not None:
     # Convert the file to an opencv image.
     file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
