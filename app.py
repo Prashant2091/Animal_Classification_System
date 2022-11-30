@@ -93,7 +93,7 @@ if class_btn:
             with st.spinner('Model working....'):
                  plt.imshow(image)
                  plt.axis("off")
-                 predictions = predict(image)
+                 #predictions = predict(image)
                  time.sleep(1)
                  st.success('Classified')
                  st.write(predictions)
@@ -121,4 +121,4 @@ def predict(image):
     result = f"{class_names[np.argmax(scores)]} with a { (100 * np.max(scores)).round(2) } % confidence." 
 
     return result
-#predict(image)
+predict(image)
