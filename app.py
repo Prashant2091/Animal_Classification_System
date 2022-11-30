@@ -133,18 +133,7 @@ import streamlit as st
 import tensorflow as tf
 import cv2
 from tensorflow.keras.preprocessing import image
-
-
 #from tensorflow.keras.applications.densenet import densenet169
-
-
-
-
-st.set_page_config(
-    page_title="Animal Classification",
-    page_icon="🏥",
-)
-
 #title
 st.title('Application of Deep Learning Models for Animal Classification')
 st.sidebar.success("Select a page above")
