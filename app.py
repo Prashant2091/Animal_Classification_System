@@ -89,6 +89,22 @@ def load_model():
     except OSError as e:
         return None
 
+# Function to preprocess the image
+def preprocess_image(image):
+    image = image.resize((224, 224))  # Resize to match model input size
+    image = np.array(image) / 255.0  # Normalize pixel values to [0, 1]
+    image = np.expand_dims(image, axis=0)  # Add batch dimension
+    return image
+
+# Function to get prediction
+def get_prediction(image, model):
+    image = preprocess_image(image)
+    predictions = model.predict(image)
+    class_index = np.argmax(predictions[0])
+    class_name = class_names[class_index]
+    probability = predictions[0][class_index] * 100
+    return class_name, probability
+
 # Streamlit app title
 st.title('Animal Classifier')
 
@@ -107,21 +123,12 @@ if uploaded_file is not None:
     st.image(test_image, caption="Input Image", width=400)
 
     if model is not None:
-        # Preprocess the image
-        image = image.resize((188, 188))  # Resize to match model input size
-        image = np.array(image) / 255.0  # Normalize pixel values to [0, 1]
-        image = np.expand_dims(image, axis=0)  # Add batch dimension
-
         # Make a prediction
-        pred = model.predict(image).argmax()
-
-        # Show the prediction result
-        class_name, probability = get_prediction(image, model)
+        class_name, probability = get_prediction(test_image, model)
 
         # Show the prediction result
         st.write(f"Prediction: {class_name}")
         st.write(f"Probability: {probability:.2f}%")
-        #st.write(f"Prediction: {result}")
     else:
         st.error("Error loading the model. Check the model loading process.")
 else:
