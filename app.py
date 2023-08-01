@@ -59,7 +59,7 @@ if model is not None:  # Add this condition to avoid NameError
  st.success(output)
 if st.button('predict'):
  st.write("Result...")
- label = model.predict(uploaded_file)
+ label = model.predict(file)
  label = label.item()
  res = class_names.get(label)
  st.markdown(res)
