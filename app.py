@@ -39,15 +39,16 @@ else:
  st.image(test_image, caption="Input Image", width = 400)
  #pred = predict_class(np.asarray(test_image), model)
  #pred=model.predict(test_image).argmax()
+class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
 if model is not None:
  pred = model.predict(test_image).argmax()
 else:
  st.write("Model not loaded properly. Check the model loading process.")
-class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
-result = class_names[np.argmax(pred)]
-output = 'The image is a ' + result
-slot.text('Done')	
-st.success(output)
+if model is not None:  # Add this condition to avoid NameError
+ result = class_names[np.argmax(pred)]
+ output = 'The image is a ' + result
+ slot.text('Done')
+ st.success(output))
 
 '''import os
 import streamlit as st
