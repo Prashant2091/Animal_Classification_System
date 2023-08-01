@@ -4,7 +4,7 @@ Created on Sun Nov 27 00:44:37 2022
 
 @author: Prashant
 """
-'''import os
+import os
 import streamlit as st
 import tensorflow as tf
 import numpy as np
@@ -61,7 +61,7 @@ else:
 
 	slot.text('Done')
 
-	st.success(output)'''
+	st.success(output)
 
 '''import os
 import streamlit as st
