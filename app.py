@@ -72,6 +72,7 @@ import os
 import streamlit as st
 import tensorflow as tf
 from PIL import Image
+import numpy as np
 import urllib.request
 
 # Function to load the model
@@ -106,11 +107,14 @@ if uploaded_file is not None:
     st.image(test_image, caption="Input Image", width=400)
 
     if model is not None:
+        # Preprocess the image
+        test_image = test_image.resize((188, 188))  # Resize to match model input size
+        test_image = np.array(test_image) / 255.0  # Normalize pixel values to [0, 1]
+        test_image = np.expand_dims(test_image, axis=0)  # Add batch dimension
+
         # Make a prediction
-        pred = model.predict(np.expand_dims(test_image, axis=0)).argmax()
-        label = label.item()
-        res = class_names.get(label)
-        st.markdown(res)
+        pred = model.predict(test_image).argmax()
+
         # Show the prediction result
         result = class_names[pred]
         st.success(f"The image is a {result}")
