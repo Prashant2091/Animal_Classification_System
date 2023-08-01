@@ -84,10 +84,10 @@ def load_model():
         subprocess.run(['curl --output animal_model_trained.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/raw/main/animal_model_trained.hdf5"'], shell=True)
 
     try:
-        model = tf.keras.models.load_model(model_path, compile=False)
-        return model
+       model = tf.keras.models.load_model(model_path, compile=False)
+        return model, None
     except OSError as e:
-        st.error(f"Error loading the model: {str(e)}")
+        return None, f"Error loading the model: {str(e)}"
         return tf.keras.models.Sequential()  # Return an empty model (or any default model)
 
 # Function to preprocess the image
@@ -110,7 +110,8 @@ def get_prediction(image, model):
 st.title('Animal Classifier')
 
 # Load the model
-model = load_model()
+model, load_model_error = load_model()
+
 
 # Define class names
 class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
@@ -131,7 +132,7 @@ if uploaded_file is not None:
         st.write(f"Prediction: {class_name}")
         st.write(f"Probability: {probability:.2f}%")
     else:
-        st.error("Error loading the model. Check the model loading process.")
+        st.error(load_model_error)
 else:
     st.text('Waiting for upload....')
 
