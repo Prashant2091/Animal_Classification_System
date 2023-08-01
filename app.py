@@ -108,20 +108,24 @@ if uploaded_file is not None:
 
     if model is not None:
         # Preprocess the image
-        test_image = test_image.resize((188, 188))  # Resize to match model input size
-        test_image = np.array(test_image) / 255.0  # Normalize pixel values to [0, 1]
-        test_image = np.expand_dims(test_image, axis=0)  # Add batch dimension
+        image = image.resize((224, 224))  # Resize to match model input size
+        image = np.array(image) / 255.0  # Normalize pixel values to [0, 1]
+        image = np.expand_dims(image, axis=0)  # Add batch dimension
 
         # Make a prediction
-        pred = model.predict(test_image).argmax()
+        pred = model.predict(image).argmax()
 
         # Show the prediction result
         result = class_names[pred]
-        st.success(f"The image is a {result}")
+        st.write(f"Prediction: {result}")
     else:
         st.error("Error loading the model. Check the model loading process.")
 else:
     st.text('Waiting for upload....')
+
+
+
+
 
   
 
