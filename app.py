@@ -85,10 +85,10 @@ def load_model():
 
     try:
        model = tf.keras.models.load_model(model_path, compile=False)
-        return model, None
+       return model, None
     except OSError as e:
-        return None, f"Error loading the model: {str(e)}"
-        return tf.keras.models.Sequential()  # Return an empty model (or any default model)
+       return None, f"Error loading the model: {str(e)}"
+       return tf.keras.models.Sequential()  # Return an empty model (or any default model)
 
 # Function to preprocess the image
 def preprocess_image(image):
