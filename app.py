@@ -1,10 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 27 00:44:37 2022
-
-@author: Prashant
-"""
-import os
+'''import os
 import streamlit as st
 import tensorflow as tf
 import numpy as np
@@ -67,7 +61,48 @@ if file is not None:
  res = class_names.get(label)
  st.markdown(res)
 else:
- st.text('Waiting for upload....')
+ st.text('Waiting for upload....')  '''
+
+
+import os
+import streamlit as st
+import tensorflow as tf
+from PIL import Image
+import urllib.request
+
+# Function to load the model
+@st.cache(allow_output_mutation=True)
+@st.experimental_singleton
+def load_model():  
+    if not os.path.isfile('animal_model_trained.hdf5'):
+        subprocess.run(['curl --output animal_model_trained.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/raw/main/animal_model_trained.hdf5"'], shell=True)
+    return tf.keras.models.load_model('animal_model_trained.hdf5', compile=False)
+
+# Load the model
+model = load_model()
+
+# Define class names
+class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
+
+# Streamlit app title
+st.title('Animal Classifier')
+
+# File uploader widget
+uploaded_file = st.file_uploader("Upload an image of an animal", type=["jpg", "png"])
+
+if uploaded_file is not None:
+    # Display the uploaded image
+    test_image = Image.open(uploaded_file)
+    st.image(test_image, caption="Input Image", width=400)
+
+    # Make a prediction
+    pred = model.predict(np.expand_dims(test_image, axis=0)).argmax()
+
+    # Show the prediction result
+    result = class_names[pred]
+    st.success(f"The image is a {result}")
+else:
+    st.text('Waiting for upload....')
 
   
 
