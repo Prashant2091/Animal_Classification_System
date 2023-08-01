@@ -86,7 +86,6 @@ def load_model():
         model = tf.keras.models.load_model(model_path, compile=False)
         return model
     except OSError as e:
-        st.error(f"Error loading the model: {str(e)}")
         return None
 
 # Streamlit app title
@@ -114,7 +113,7 @@ if uploaded_file is not None:
         result = class_names[pred]
         st.success(f"The image is a {result}")
     else:
-        st.write("Model not loaded properly. Check the model loading process.")
+        st.error("Error loading the model. Check the model loading process.")
 else:
     st.text('Waiting for upload....')
 
