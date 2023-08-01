@@ -48,7 +48,7 @@ if model is not None:  # Add this condition to avoid NameError
  result = class_names[np.argmax(pred)]
  output = 'The image is a ' + result
  slot.text('Done')
- st.success(output))
+ st.success(output)
 
 '''import os
 import streamlit as st
