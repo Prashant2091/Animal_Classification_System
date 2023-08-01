@@ -52,7 +52,11 @@ else:
 
 	st.image(test_image, caption="Input Image", width = 400)
 	#pred = predict_class(np.asarray(test_image), model)
-	pred=model.predict(test_image).argmax()
+	#pred=model.predict(test_image).argmax()
+	if model is not None:
+         pred = model.predict(test_image).argmax()
+        else:
+         st.write("Model not loaded properly. Check the model loading process.")
 	class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
 
 	result = class_names[np.argmax(pred)]
