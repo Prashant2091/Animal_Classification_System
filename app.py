@@ -43,11 +43,11 @@ if model is not None:
  pred = model.predict(test_image).argmax()
 else:
  st.write("Model not loaded properly. Check the model loading process.")
- class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
- result = class_names[np.argmax(pred)]
- output = 'The image is a ' + result
- slot.text('Done')	
- st.success(output)
+class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
+result = class_names[np.argmax(pred)]
+output = 'The image is a ' + result
+slot.text('Done')	
+st.success(output)
 
 '''import os
 import streamlit as st
