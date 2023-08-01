@@ -62,8 +62,6 @@ if file is not None:
  st.markdown(res)
 else:
  st.text('Waiting for upload....')  '''
-
-
 import os
 import streamlit as st
 import tensorflow as tf
