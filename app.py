@@ -61,12 +61,14 @@ if model is not None:  # Add this condition to avoid NameError
  st.success(output)
 if st.button('predict'):
  st.write("Result...")
+if file is not None:
  label = model.predict(file)
  label = label.item()
  res = class_names.get(label)
  st.markdown(res)
+else:
+ st.text('Waiting for upload....')
 
-            
   
 
 
