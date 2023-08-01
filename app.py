@@ -108,7 +108,7 @@ if uploaded_file is not None:
 
     if model is not None:
         # Preprocess the image
-        image = image.resize((224, 224))  # Resize to match model input size
+        image = image.resize((188, 188))  # Resize to match model input size
         image = np.array(image) / 255.0  # Normalize pixel values to [0, 1]
         image = np.expand_dims(image, axis=0)  # Add batch dimension
 
