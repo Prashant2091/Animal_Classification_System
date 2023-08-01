@@ -80,6 +80,7 @@ import urllib.request
 @st.experimental_singleton
 def load_model():
     model_path = 'animal_model_trained.hdf5'
+    print("Model Path:", model_path)
     if not os.path.isfile(model_path):
         subprocess.run(['curl --output animal_model_trained.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/raw/main/animal_model_trained.hdf5"'], shell=True)
 
