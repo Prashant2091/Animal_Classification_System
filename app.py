@@ -10,11 +10,17 @@ st.set_option('deprecation.showfileUploaderEncoding', False)
 @st.cache(allow_output_mutation=True)
 
 @st.experimental_singleton
-def load_model():  
- if not os.path.isfile('animal_model_trained.hdf5'):
-   subprocess.run(['curl --output animal_model_trained.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/raw/main/animal_model_trained.hdf5"'], shell=True)
-   return tf.keras.models.load_model('animal_model_trained.hdf5', compile=False)
-model = load_model()
+def load_model():
+    model_path = 'animal_model_trained.hdf5'
+    if not os.path.isfile(model_path):
+        subprocess.run(['curl --output animal_model_trained.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/raw/main/animal_model_trained.hdf5"'], shell=True)
+
+    try:
+        model = tf.keras.models.load_model(model_path, compile=False)
+        return model
+    except OSError as e:
+        st.error(f"Error loading the model: {str(e)}")
+        return None
 st.title('Animal Classifier')
 file_uploader_key = hash("Upload an image of an animal")
 file = st.file_uploader("Upload an image of an animal", type=["jpg", "png"], key=file_uploader_key)
@@ -71,13 +77,17 @@ import urllib.request
 # Function to load the model
 @st.cache(allow_output_mutation=True)
 @st.experimental_singleton
-def load_model():  
-    if not os.path.isfile('animal_model_trained.hdf5'):
+def load_model():
+    model_path = 'animal_model_trained.hdf5'
+    if not os.path.isfile(model_path):
         subprocess.run(['curl --output animal_model_trained.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/raw/main/animal_model_trained.hdf5"'], shell=True)
-    return tf.keras.models.load_model('animal_model_trained.hdf5', compile=False)
 
-# Load the model
-model = load_model()
+    try:
+        model = tf.keras.models.load_model(model_path, compile=False)
+        return model
+    except OSError as e:
+        st.error(f"Error loading the model: {str(e)}")
+        return None
 
 # Define class names
 class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
