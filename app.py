@@ -18,8 +18,17 @@ st.set_option('deprecation.showfileUploaderEncoding', False)
 @st.experimental_singleton
 def load_model():  
  if not os.path.isfile('animal_model_trained.hdf5'):
-    subprocess.run(['curl --output model.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/blob/main/animal_model_trained.hdf5"'], shell=True)
-    return tf.keras.models.load_model('model.hdf5', compile=False)
+   subprocess.run(['curl --output animal_model_trained.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/raw/main/animal_model_trained.hdf5"'], shell=True)
+   return tf.keras.models.load_model('animal_model_trained.hdf5', compile=False)
+model = load_model()
+st.title('Animal Classifier')
+file = st.file_uploader("Upload an image of an animal", type=["jpg", "png"])
+if file is not None:
+ label = model.predict(uploaded_file)
+ # Process the prediction result as needed
+ # ...
+else:
+ st.text('Waiting for upload....')
 def predict_class(image, model):
  image = tf.cast(image, tf.float32)
  image = tf.image.resize(image, [188, 188])
@@ -27,7 +36,6 @@ def predict_class(image, model):
  image = image[np.newaxis,...]
  prediction = model.predict(image)
  return prediction
-model = load_model()
 st.title('Animal Classifier')
 file = st.file_uploader("Upload an image of an animal", type=["jpg", "png"])
 if file is None:
