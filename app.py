@@ -89,11 +89,14 @@ def load_model():
         st.error(f"Error loading the model: {str(e)}")
         return None
 
-# Define class names
-class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
-
 # Streamlit app title
 st.title('Animal Classifier')
+
+# Load the model
+model = load_model()
+
+# Define class names
+class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
 
 # File uploader widget
 uploaded_file = st.file_uploader("Upload an image of an animal", type=["jpg", "png"])
@@ -103,12 +106,15 @@ if uploaded_file is not None:
     test_image = Image.open(uploaded_file)
     st.image(test_image, caption="Input Image", width=400)
 
-    # Make a prediction
-    pred = model.predict(np.expand_dims(test_image, axis=0)).argmax()
+    if model is not None:
+        # Make a prediction
+        pred = model.predict(np.expand_dims(test_image, axis=0)).argmax()
 
-    # Show the prediction result
-    result = class_names[pred]
-    st.success(f"The image is a {result}")
+        # Show the prediction result
+        result = class_names[pred]
+        st.success(f"The image is a {result}")
+    else:
+        st.write("Model not loaded properly. Check the model loading process.")
 else:
     st.text('Waiting for upload....')
 
