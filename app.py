@@ -108,7 +108,9 @@ if uploaded_file is not None:
     if model is not None:
         # Make a prediction
         pred = model.predict(np.expand_dims(test_image, axis=0)).argmax()
-
+        label = label.item()
+        res = class_names.get(label)
+        st.markdown(res)
         # Show the prediction result
         result = class_names[pred]
         st.success(f"The image is a {result}")
