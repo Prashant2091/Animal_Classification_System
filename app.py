@@ -80,7 +80,6 @@ import urllib.request
 @st.experimental_singleton
 def load_model():
     model_path = 'animal_model_trained.hdf5'
-    print("Model Path:", model_path)
     if not os.path.isfile(model_path):
         subprocess.run(['curl --output animal_model_trained.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/raw/main/animal_model_trained.hdf5"'], shell=True)
 
@@ -88,7 +87,8 @@ def load_model():
         model = tf.keras.models.load_model(model_path, compile=False)
         return model
     except OSError as e:
-        return None
+        st.error(f"Error loading the model: {str(e)}")
+        return tf.keras.models.Sequential()  # Return an empty model (or any default model)
 
 # Function to preprocess the image
 def preprocess_image(image):
