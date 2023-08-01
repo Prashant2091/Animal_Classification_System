@@ -22,7 +22,9 @@ def load_model():
    return tf.keras.models.load_model('animal_model_trained.hdf5', compile=False)
 model = load_model()
 st.title('Animal Classifier')
-file = st.file_uploader("Upload an image of an animal", type=["jpg", "png"])
+file_uploader_key = hash("Upload an image of an animal")
+file = st.file_uploader("Upload an image of an animal", type=["jpg", "png"], key=file_uploader_key)
+#file = st.file_uploader("Upload an image of an animal", type=["jpg", "png"])
 if file is not None:
  label = model.predict(uploaded_file)
  # Process the prediction result as needed
