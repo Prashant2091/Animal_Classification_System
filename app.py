@@ -116,8 +116,12 @@ if uploaded_file is not None:
         pred = model.predict(image).argmax()
 
         # Show the prediction result
-        result = class_names[pred]
-        st.write(f"Prediction: {result}")
+        class_name, probability = get_prediction(image, model)
+
+        # Show the prediction result
+        st.write(f"Prediction: {class_name}")
+        st.write(f"Probability: {probability:.2f}%")
+        #st.write(f"Prediction: {result}")
     else:
         st.error("Error loading the model. Check the model loading process.")
 else:
