@@ -1,15 +1,13 @@
-'''import os
+import os
 import streamlit as st
 import tensorflow as tf
-import numpy as np
 from PIL import Image
+import numpy as np
 import urllib.request
 import subprocess
-st.set_option('deprecation.showfileUploaderEncoding', False)
 
+# Function to load the model
 @st.cache(allow_output_mutation=True)
-
-@st.experimental_singleton
 def load_model():
     model_path = 'animal_model_trained.hdf5'
     if not os.path.isfile(model_path):
@@ -19,76 +17,7 @@ def load_model():
         model = tf.keras.models.load_model(model_path, compile=False)
         return model
     except OSError as e:
-        st.error(f"Error loading the model: {str(e)}")
         return None
-st.title('Animal Classifier')
-file_uploader_key = hash("Upload an image of an animal")
-file = st.file_uploader("Upload an image of an animal", type=["jpg", "png"], key=file_uploader_key)
-#file = st.file_uploader("Upload an image of an animal", type=["jpg", "png"])
-if file is not None:
- label = model.predict(uploaded_file)
- # Process the prediction result as needed
- # ...
-else:
- st.text('Waiting for upload....')
-def predict_class(image, model):
- image = tf.cast(image, tf.float32)
- image = tf.image.resize(image, [188, 188])
- #image = np.expand_dims(image, axis = 0)
- image = image[np.newaxis,...]
- prediction = model.predict(image)
- return prediction
-st.title('Animal Classifier')
-file = st.file_uploader("Upload an image of an animal", type=["jpg", "png"])
-if file is None:
- st.text('Waiting for upload....')
-else:
- slot = st.empty()
- slot.text('Running inference....')
- test_image = Image.open(file)
- st.image(test_image, caption="Input Image", width = 400)
- #pred = predict_class(np.asarray(test_image), model)
- #pred=model.predict(test_image).argmax()
-class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
-if model is not None:
- pred = model.predict(test_image).argmax()
-else:
- st.write("Model not loaded properly. Check the model loading process.")
-if model is not None:  # Add this condition to avoid NameError
- result = class_names[np.argmax(pred)]
- output = 'The image is a ' + result
- slot.text('Done')
- st.success(output)
-if st.button('predict'):
- st.write("Result...")
-if file is not None:
- label = model.predict(file)
- label = label.item()
- res = class_names.get(label)
- st.markdown(res)
-else:
- st.text('Waiting for upload....')  '''
-import os
-import streamlit as st
-import tensorflow as tf
-from PIL import Image
-import numpy as np
-import urllib.request
-
-# Function to load the model
-@st.cache(allow_output_mutation=True)
-@st.experimental_singleton
-def load_model():
-    model_path = 'animal_model_trained.hdf5'
-    if not os.path.isfile(model_path):
-        subprocess.run(['curl --output animal_model_trained.hdf5 "https://github.com/Prashant2091/Animal_Classification_System/raw/main/animal_model_trained.hdf5"'], shell=True)
-
-    try:
-       model = tf.keras.models.load_model(model_path, compile=False)
-       return model, None
-    except OSError as e:
-       return None, f"Error loading the model: {str(e)}"
-       return tf.keras.models.Sequential()  # Return an empty model (or any default model)
 
 # Function to preprocess the image
 def preprocess_image(image):
@@ -110,8 +39,7 @@ def get_prediction(image, model):
 st.title('Animal Classifier')
 
 # Load the model
-model, load_model_error = load_model()
-
+model = load_model()
 
 # Define class names
 class_names = ['butterfly', 'cow', 'elephant', 'sheep', 'squirrel']
@@ -132,17 +60,6 @@ if uploaded_file is not None:
         st.write(f"Prediction: {class_name}")
         st.write(f"Probability: {probability:.2f}%")
     else:
-        st.error(load_model_error)
+        st.error("Error loading the model. Please try again later.")
 else:
     st.text('Waiting for upload....')
-
-
-
-
-
-  
-
-
-
-
-
